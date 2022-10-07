@@ -1,6 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class EdgeSortingCode {
@@ -16,31 +15,19 @@ public class EdgeSortingCode {
 
     }
 
-    public static void initializingArray() throws FileNotFoundException {
-        int totalRow = 8;
-        int totalColumn = 8;
-        int[][] edgeMatchingArray = new int[totalRow][totalColumn];
-        File file = new File("Ass1Input.txt");
-        Scanner scanner = new Scanner(file);
-
-
-        for (int row = 0; scanner.hasNextLine() && row < totalRow; row++) {
-            char[] chars = scanner.nextLine().toCharArray();
-            for (int i = 0; i < totalColumn && i < chars.length; i++) {
-                edgeMatchingArray[row][i] = chars[i];
+    public static void main(String args[]) throws Exception {
+            Scanner sc = new Scanner(new BufferedReader(new FileReader("Ass1Input.txt")));
+            int rows = 8;
+            int columns = 8;
+            int [][] edgeMatchingArray = new int[rows][columns];
+            while(sc.hasNextLine()) {
+                for (int i=0; i<edgeMatchingArray.length; i++) {
+                    String[] line = sc.nextLine().trim().split(" ");
+                    for (int j=0; j<line.length; j++) {
+                        edgeMatchingArray[i][j] = Integer.parseInt(line[j]);
+                    }
+                }
             }
+            System.out.println(Arrays.deepToString(edgeMatchingArray));
         }
-    }
-    public static void PrintArray(int[][] edgeMatchingArray) {
-        for (int row = 0; row < edgeMatchingArray.length; row++) {
-            System.out.println(edgeMatchingArray[row]);
-        }
-    }
-
-    public static void main(String[] args)
-            throws IOException, InterruptedException {
-
-        System.out.println("Given Array from input:");
-        PrintArray(edgeMatchingArray);
-
 }
