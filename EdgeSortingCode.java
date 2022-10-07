@@ -4,15 +4,29 @@ import java.util.Scanner;
 
 public class EdgeSortingCode {
 
-    public EdgeSortingCode() throws FileNotFoundException {
-    }
-
     public static void mutate(){
 
+
     }
 
-    public static void crossover(){
+    public static void crossover(){ //a swap function which switches two different pieces of the puzzle
 
+    }
+
+    public static void printArray(int[][] a) {
+        int rows = a.length;
+        int cols = a[0].length;
+        System.out.print("[ ");
+        for (int row=0; row<rows; row++) {
+            if (row > 0) System.out.print("  ");
+            System.out.print("[");
+            for (int col=0; col<cols; col++) {
+                if (col > 0) System.out.print(", ");
+                System.out.format("%3d",a[row][col]); // field-width = 3
+            }
+            System.out.println("]");
+        }
+        System.out.println("]");
     }
 
     public static void main(String args[]) throws Exception {
@@ -28,6 +42,6 @@ public class EdgeSortingCode {
                     }
                 }
             }
-            System.out.println(Arrays.deepToString(edgeMatchingArray));
+            printArray(edgeMatchingArray);
         }
 }
