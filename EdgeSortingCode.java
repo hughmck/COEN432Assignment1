@@ -9,9 +9,12 @@ public class EdgeSortingCode {
 
     }
 
-    public static void crossover(){ //a swap function which switches two different pieces of the puzzle
+    public static void crossover(int[][] a, int i0, int j0, int i1, int j1){ //a swap function which switches two different pieces of the puzzle
+        int temp = a[i0][j0]; //
+        a[i0][j0] = a[i1][j1];
+        a[i1][j1] = temp;
+    }       // example of the function: crossover(a,0,1,2,0); // swap a[0][1] with a[2][0]
 
-    }
 
     public static void printArray(int[][] a) {
         int rows = a.length;
@@ -22,7 +25,7 @@ public class EdgeSortingCode {
             System.out.print("[");
             for (int col=0; col<cols; col++) {
                 if (col > 0) System.out.print(", ");
-                System.out.format("%3d",a[row][col]); // field-width = 3
+                System.out.format("%3d",a[row][col]);
             }
             System.out.println("]");
         }
