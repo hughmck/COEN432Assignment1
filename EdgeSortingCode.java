@@ -3,12 +3,16 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class EdgeSortingCode {
-
-    public static void mutate(){
-
-
+// using of an attribute mutationRate
+   private static final double mutationRate = 0.5;
+private void mutateAttempt(Individual indiv) {
+        for (int i = 0; i < printArray(); i++) {
+            if (Math.random() <= mutationRate) {
+                byte gene = (byte) Math.round(Math.random());
+                printArray(i, gene);
+            }
+        }
     }
-
     public static void crossover(int[][] a, int i0, int j0, int i1, int j1){ //a swap function which switches two different pieces of the puzzle
         int temp = a[i0][j0]; //
         a[i0][j0] = a[i1][j1];
