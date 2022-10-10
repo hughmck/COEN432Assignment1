@@ -3,6 +3,16 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class EdgeSortingCode {
+     
+     public static int[] numarray(int num) {
+        ArrayList<Integer> arrayNum = new ArrayList<Integer>();
+        do{
+            array.add(num % 10);
+            num /= 10;
+        } while  (num > 0);
+
+        return arrayNum;
+    }
 
      public static void mutate(int[][] a, int i0, int j0, int i1, int j1){
        ArrayList<Integer> num1=numarray(a[i0][j0]);  // convert number to array
