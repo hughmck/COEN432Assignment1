@@ -4,9 +4,17 @@ import java.util.Scanner;
 
 public class EdgeSortingCode {
 
-    public static void mutate(){
+     public static void mutate(int[][] a, int i0, int j0, int i1, int j1){
+       ArrayList<Integer> num1=numarray(a[i0][j0]);  // convert number to array
+       ArrayList<Integer> num2=numarray(a[i1][j1]);
 
+       ArrayList<Integer> diff=num1.retainAll(num2); // check if there are any commun edges
 
+       if(diff.isEmpty()) {  // mismatching edges
+           for(int i=k;i<4;i++) {
+               crossover(a, i0, j0, i1, j1);  // switch pieces of puzzle
+           }
+       }
     }
 
     public static void crossover(int[][] a, int i0, int j0, int i1, int j1){ //a swap function which switches two different pieces of the puzzle
