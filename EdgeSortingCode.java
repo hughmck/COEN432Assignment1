@@ -25,6 +25,19 @@ public class EdgeSortingCode {
            }
        }
     }
+      public static void selection (int[][] a){
+        Scanner sc = new Scanner(new BufferedReader(new FileReader("Ass1Input.txt")));
+        int rows = 8;
+        int columns = 8;
+        int [][] edgeMatchingArray = new int[rows][columns];
+        while(sc.hasNextLine()) {
+            for (int i=0; i<edgeMatchingArray.length; i++) {
+                String[] line = sc.nextLine().trim().split(" ");
+                for (int j=0; j<line.length; j++) {
+                    edgeMatchingArray[i][j] = Integer.parseInt(line[j]);
+                }
+            }
+        }
 
     public static void crossover(int[][] a, int i0, int j0, int i1, int j1){ //a swap function which switches two different pieces of the puzzle
         int temp = a[i0][j0]; //
