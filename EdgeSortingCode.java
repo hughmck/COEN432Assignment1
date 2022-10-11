@@ -1,13 +1,13 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EdgeSortingCode {
      
-     public static int[] numarray(int num) {
+     public static ArrayList<Integer> numarray(int num) {
         ArrayList<Integer> arrayNum = new ArrayList<Integer>();
         do{
-            array.add(num % 10);
-            num /= 10;
+            num /= 4;
         } while  (num > 0);
 
         return arrayNum;
@@ -17,15 +17,15 @@ public class EdgeSortingCode {
        ArrayList<Integer> num1=numarray(a[i0][j0]);  // convert number to array
        ArrayList<Integer> num2=numarray(a[i1][j1]);
 
-       ArrayList<Integer> diff=num1.retainAll(num2); // check if there are any commun edges
+       boolean diff=num1.retainAll(num2); // check if there are any commun edges
 
-       if(diff.isEmpty()) {  // mismatching edges
-           for(int i=k;i<4;i++) {
+       if(diff) {  // mismatching edges
+           for(int i=j1;i<4;i++) {
                crossover(a, i0, j0, i1, j1);  // switch pieces of puzzle
            }
        }
     }
-      public static void selection (int[][] a){
+      public static void selection (int[][] a) throws FileNotFoundException{
         Scanner sc = new Scanner(new BufferedReader(new FileReader("Ass1Input.txt")));
         int rows = 8;
         int columns = 8;
@@ -36,7 +36,7 @@ public class EdgeSortingCode {
                 for (int j=0; j<line.length; j++) {
                     edgeMatchingArray[i][j] = Integer.parseInt(line[j]);
                 }
-            }
+            }}
         }
 
     public static void crossover(int[][] a, int i0, int j0, int i1, int j1){ //a swap function which switches two different pieces of the puzzle
