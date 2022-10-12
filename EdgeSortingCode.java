@@ -13,7 +13,7 @@ public class EdgeSortingCode {
         return arrayNum;
     }
 
-     public static void mutate(int[][] a, int i0, int j0, int i1, int j1){
+     public static void crossover(int[][] a, int i0, int j0, int i1, int j1){
        ArrayList<Integer> num1=numarray(a[i0][j0]);  // convert number to array
        ArrayList<Integer> num2=numarray(a[i1][j1]);
 
@@ -21,32 +21,32 @@ public class EdgeSortingCode {
 
        if(diff) {  // mismatching edges
            for(int i=j1;i<4;i++) {
-               crossover(a, i0, j0, i1, j1);  // switch pieces of puzzle
+               randomMutation(a, i0, j0, i1, j1);  // switch pieces of puzzle
            }
        }
     }
-      public static void selection (int[][] a) throws FileNotFoundException{
+      public static void selectionArray (int[][] a) throws FileNotFoundException{
         Scanner sc = new Scanner(new BufferedReader(new FileReader("Ass1Input.txt")));
         int rows = 8;
         int columns = 8;
-        int [][] edgeMatchingArray = new int[rows][columns];
+        int [][] arrayRepresentation = new int[rows][columns];
         while(sc.hasNextLine()) {
-            for (int i=0; i<edgeMatchingArray.length; i++) {
+            for (int i=0; i<arrayRepresentation.length; i++) {
                 String[] line = sc.nextLine().trim().split(" ");
                 for (int j=0; j<line.length; j++) {
-                    edgeMatchingArray[i][j] = Integer.parseInt(line[j]);
+                    arrayRepresentation[i][j] = Integer.parseInt(line[j]);
                 }
             }}
         }
 
-    public static void crossover(int[][] a, int i0, int j0, int i1, int j1){ //a swap function which switches two different pieces of the puzzle
-        int temp = a[i0][j0]; //
+    public static void randomMutation(int[][] a, int i0, int j0, int i1, int j1){ 
+        int temp = a[i0][j0]; 
         a[i0][j0] = a[i1][j1];
         a[i1][j1] = temp;
-    }       // example of the function: crossover(a,0,1,2,0); // swap a[0][1] with a[2][0]
+    }       
 
 
-    public static void printArray(int[][] a) {
+    public static void printBestSolution(int[][] a) {
         int rows = a.length;
         int cols = a[0].length;
         System.out.print("[ ");
@@ -152,26 +152,37 @@ public class EdgeSortingCode {
 
 
     public static void main(String args[]) throws Exception {
+        //step 0 : initialization of the population 
             Scanner sc = new Scanner(new BufferedReader(new FileReader("Ass1Input.txt")));
             int rows = 8;
             int columns = 8;
-            int [][] edgeMatchingArray = new int[rows][columns];
+            //step 1 : representation and encoding of choice 
+            int [][] arrayRepresentation = new int[rows][columns];
             while(sc.hasNextLine()) {
-                for (int i=0; i<edgeMatchingArray.length; i++) {
+                for (int i=0; i<arrayRepresentation.length; i++) {
                     String[] line = sc.nextLine().trim().split(" ");
                     for (int j=0; j<line.length; j++) {
-                        edgeMatchingArray[i][j] = Integer.parseInt(line[j]);
+                        arrayRepresentation[i][j] = Integer.parseInt(line[j]);
                     }
                 }
             }
-            printArray(edgeMatchingArray);
-           int testingArray[][] = {
-        		{1120,		1011},
+            // initial checking output 
+            printBestSolution(arrayRepresentation);
+            //step 2 : random_wheel selection 
+           int selectionArray[][] = {
+        		{1256,		1256},
         		
-        		{1000,		1000}
+        		{2651,		1456}
             };
-            printArray(testingArray);
-            int test = computeFitness(testingArray, 2, 2);
+            printBestSolution(selectionArray);
+             
+
+            //step 3 : apply crossover 
+             crossover(selectionArray, columns, columns, rows, columns);
+            //step 4 : apply randomMutation 
+            randomMutation(selectionArray, columns, columns, rows, columns);
+            //step 5: recheck the fitness again
+            int test = computeFitness(selectionArray, 2, 2);
             System.out.println("Errors found: " + test + "\n");
         
         }
