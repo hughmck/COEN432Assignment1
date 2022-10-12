@@ -85,7 +85,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("error with top check on [" + r + "][" + c + "]");
+    					System.out.println("error with top check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -103,7 +103,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("error with bottom check on [" + r + "][" + c + "]");
+    					System.out.println("error with bottom check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -121,7 +121,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("error with right check on [" + r + "][" + c + "]");
+    					System.out.println("error with right check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -140,7 +140,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("error with left check on [" + r + "][" + c + "]");
+    					System.out.println("error with left check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -172,7 +172,7 @@ public class EdgeSortingCode {
             };
             printArray(testingArray);
             int test = computeFitness(testingArray, 2, 2);
-            log("Errors found: " + test + "\n");
+            System.out.println("Errors found: " + test + "\n");
         
         }
 }
