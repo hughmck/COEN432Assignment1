@@ -3,8 +3,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EdgeSortingCode {
+	
      
-     public static ArrayList<Integer> numarray(int num) {
+    public static ArrayList<Integer> numarray(int num) {
         ArrayList<Integer> arrayNum = new ArrayList<Integer>();
         do{
             num /= 10;
@@ -13,19 +14,15 @@ public class EdgeSortingCode {
         return arrayNum;
     }
 
-     public static void crossover(int[][] a, int i0, int j0, int i1, int j1){
-       ArrayList<Integer> num1=numarray(a[i0][j0]);  // convert number to array
-       ArrayList<Integer> num2=numarray(a[i1][j1]);
+ 	public static void log(String msg) {
+ 		System.out.println(msg);
+ 	}
+ 	public static void log(int msg) {
+ 		System.out.println(msg);
+ 	}
 
-       boolean diff=num1.retainAll(num2); // check if there are any commun edges
-
-       if(diff) {  // mismatching edges
-           for(int i=j1;i<4;i++) {
-               randomMutation(a, i0, j0, i1, j1);  // switch pieces of puzzle
-           }
-       }
-    }
-      public static void selectionArray (int[][] a) throws FileNotFoundException{
+    
+     public static void selectionArray (int[][] a) throws FileNotFoundException{
         Scanner sc = new Scanner(new BufferedReader(new FileReader("Ass1Input.txt")));
         int rows = 8;
         int columns = 8;
@@ -39,14 +36,27 @@ public class EdgeSortingCode {
             }}
         }
 
-    public static void randomMutation(int[][] a, int i0, int j0, int i1, int j1){ 
+    public static void randomMutation(int[][] a, int i0, int j0, int i1, int j1){
+        
         int temp = a[i0][j0]; 
         a[i0][j0] = a[i1][j1];
         a[i1][j1] = temp;
-    }       
+    }    
+    public static void crossover(int[][] a, int i0, int j0, int i1, int j1){
+        ArrayList<Integer> num1=numarray(a[i0][j0]);  // convert number to array
+        ArrayList<Integer> num2=numarray(a[i1][j1]);
+ 
+        boolean diff=num1.retainAll(num2); // check if there are any commun edges
+ 
+        if(diff) {  // mismatching edges
+            for(int i=j1;i<4;i++) {
+                randomMutation(a, i0, j0, i1, j1);  // switch pieces of puzzle
+            }
+        }
+     }   
 
 
-    public static void printBestSolution(int[][] a) {
+     public static void printBestSolution(int[][] a) {
         int rows = a.length;
         int cols = a[0].length;
         System.out.print("[ ");
@@ -61,7 +71,8 @@ public class EdgeSortingCode {
         }
         System.out.println("]");
     }
-      public static int computeFitness( int[][] a, int rows, int columns )
+    
+    public static int computeFitness( int[][] a, int rows, int columns )
     {
     	int r = 0, c = 0;
     	int tmp1 = 0, tmp2 = 0;
@@ -85,7 +96,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					System.out.println("error with top check on [" + r + "][" + c + "]");
+    					log("error with top check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -103,7 +114,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					System.out.println("error with bottom check on [" + r + "][" + c + "]");
+    					log("error with bottom check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -121,7 +132,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					System.out.println("error with right check on [" + r + "][" + c + "]");
+    					log("error with right check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -140,7 +151,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					System.out.println("error with left check on [" + r + "][" + c + "]");
+    					log("error with left check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -150,13 +161,12 @@ public class EdgeSortingCode {
     	return mismatches;
     }
 
-
     public static void main(String args[]) throws Exception {
-        //step 0 : initialization of the population 
-            Scanner sc = new Scanner(new BufferedReader(new FileReader("Ass1Input.txt")));
+         //step 0 : initialization of the population 
+            Scanner sc = new Scanner(new BufferedReader(new FileReader(  "Ass1Input.txt")));
             int rows = 8;
             int columns = 8;
-            //step 1 : representation and encoding of choice 
+            
             int [][] arrayRepresentation = new int[rows][columns];
             while(sc.hasNextLine()) {
                 for (int i=0; i<arrayRepresentation.length; i++) {
@@ -166,24 +176,21 @@ public class EdgeSortingCode {
                     }
                 }
             }
-            // initial checking output 
-            printBestSolution(arrayRepresentation);
+            
+      // initial checking output 
             //step 2 : random_wheel selection 
-           int selectionArray[][] = {
-        		{1256,		1256},
+            int selectionArray[][] = {
+        		{1120,		1011},
         		
-        		{2651,		1456}
+        		{1000,		1000}
             };
             printBestSolution(selectionArray);
-             
-
             //step 3 : apply crossover 
-             crossover(selectionArray, columns, columns, rows, columns);
+            crossover(selectionArray, columns, columns, rows, columns);
             //step 4 : apply randomMutation 
             randomMutation(selectionArray, columns, columns, rows, columns);
             //step 5: recheck the fitness again
             int test = computeFitness(selectionArray, 2, 2);
-            System.out.println("Errors found: " + test + "\n");
-        
+            log("Errors found: " + test + "\n");
         }
 }
