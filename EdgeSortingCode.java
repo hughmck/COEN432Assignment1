@@ -7,7 +7,7 @@ public class EdgeSortingCode {
      public static ArrayList<Integer> numarray(int num) {
         ArrayList<Integer> arrayNum = new ArrayList<Integer>();
         do{
-            num /= 4;
+            num /= 10;
         } while  (num > 0);
 
         return arrayNum;
@@ -61,6 +61,95 @@ public class EdgeSortingCode {
         }
         System.out.println("]");
     }
+      public static int computeFitness( int[][] a, int rows, int columns )
+    {
+    	int r = 0, c = 0;
+    	int tmp1 = 0, tmp2 = 0;
+    	
+    	int mismatches = 0;
+    	
+    	for( r = 0; r < rows; r++ )
+    	{
+    		for( c = 0; c < columns; c++ )
+    		{
+    			// Check for the value on the top
+    			if(r > 0)
+    			{
+    				tmp1 = a[r][c];
+    				tmp2 = a[r-1][c];
+
+    				tmp1 /= 1000;
+    				
+    				tmp2 /= 10;
+    				tmp2 = (int) (tmp2 - Math.floor((tmp2/10))*10);
+
+    				if(tmp1 != tmp2)
+    				{
+    					log("error with top check on [" + r + "][" + c + "]");
+    					mismatches++;
+    				}
+    			}
+    			
+    			// Check for the value on the bottom
+    			if(r < rows-1)
+    			{
+    				tmp1 = a[r][c];
+    				tmp2 = a[r+1][c];
+    				
+    				tmp1 /= 10;
+    				tmp1 = (int) (tmp1 - Math.floor((tmp1/10))*10);
+
+    				tmp2 /= 1000;
+
+    				if(tmp1 != tmp2)
+    				{
+    					log("error with bottom check on [" + r + "][" + c + "]");
+    					mismatches++;
+    				}
+    			}
+    			
+    			// Check for the value on the right
+    			if(c < columns-1)
+    			{
+    				tmp1 = a[r][c];
+    				tmp2 = a[r][c+1];
+
+    				tmp1 /= 100;
+    				tmp1 = (int) (tmp1 - Math.floor((tmp1/10))*10);
+
+    				tmp2 = (int) (tmp2 - Math.floor((tmp2/10))*10);
+
+    				if(tmp1 != tmp2)
+    				{
+    					log("error with right check on [" + r + "][" + c + "]");
+    					mismatches++;
+    				}
+    			}
+
+    			
+    			// Check for the value on the left
+    			if(c > 0)
+    			{
+    				tmp1 = a[r][c];
+    				tmp2 = a[r][c-1];
+    				
+    				tmp1 = (int) (tmp1 - Math.floor((tmp1/10))*10);
+
+    				tmp2 /= 100;
+    				tmp2 = (int) (tmp2 - Math.floor((tmp2/10))*10);
+
+    				if(tmp1 != tmp2)
+    				{
+    					log("error with left check on [" + r + "][" + c + "]");
+    					mismatches++;
+    				}
+    			}
+    		}
+    	}
+    	
+    	return mismatches;
+    }
+
 
     public static void main(String args[]) throws Exception {
             Scanner sc = new Scanner(new BufferedReader(new FileReader("Ass1Input.txt")));
@@ -76,5 +165,14 @@ public class EdgeSortingCode {
                 }
             }
             printArray(edgeMatchingArray);
+           int testingArray[][] = {
+        		{1120,		1011},
+        		
+        		{1000,		1000}
+            };
+            printArray(testingArray);
+            int test = computeFitness(testingArray, 2, 2);
+            log("Errors found: " + test + "\n");
+        
         }
 }
