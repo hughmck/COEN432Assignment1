@@ -37,7 +37,7 @@ public class EdgeSortingCode {
         }
 
     public static void randomMutation(int[][] a, int i0, int j0, int i1, int j1){
-        
+
         int temp = a[i0][j0]; 
         a[i0][j0] = a[i1][j1];
         a[i1][j1] = temp;
@@ -182,14 +182,11 @@ public class EdgeSortingCode {
             int selectionArray[][] = {
         		{1120,		1011},
         		
-        		{1000,		1000}
+        		{1110,		1010}
             };
             printBestSolution(selectionArray);
-            //step 3 : apply crossover 
-            crossover(selectionArray, columns, columns, rows, columns);
-            //step 4 : apply randomMutation 
-            randomMutation(selectionArray, columns, columns, rows, columns);
-            //step 5: recheck the fitness again
+            
+            //recheck the fitness again
             int test = computeFitness(selectionArray, 2, 2);
             log("Errors found: " + test + "\n");
         }
