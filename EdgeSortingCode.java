@@ -189,5 +189,31 @@ public class EdgeSortingCode {
             //recheck the fitness again
             int test = computeFitness(selectionArray, 2, 2);
             log("Errors found: " + test + "\n");
-        }
+
+            int testForBigArray = computeFitness(selectionArray, 2, 2);
+
+            log("Errors found: " + testForBigArray + "\n");
+
+            int x = 0;
+            int y = 0;
+        int z = 0;
+        int a = 0;
+
+            while (testForBigArray >= 4){
+                for (int i=0; i<8; i++) {
+                    x++;
+                }
+                for (int j=0; j<8; j++) {
+                    y++;
+                }
+                for (int i=0; i<8; i++) {
+                    z++;
+                }
+                for (int j=0; j<8; j++) {
+                    a++;
+                }
+                randomMutation(arrayRepresentation, x, y, z, a);
+            }
+    }
+
 }
