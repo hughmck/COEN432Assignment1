@@ -96,7 +96,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("error with top check on [" + r + "][" + c + "]");
+    					log("mismatch with top check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -114,7 +114,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("error with bottom check on [" + r + "][" + c + "]");
+    					log("mismatch with bottom check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -132,7 +132,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("error with right check on [" + r + "][" + c + "]");
+    					log("mismatch with right check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -151,7 +151,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("error with left check on [" + r + "][" + c + "]");
+    					log("mismatch with left check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -179,41 +179,30 @@ public class EdgeSortingCode {
             
       // initial checking output 
             //step 2 : random_wheel selection 
+            System.out.print("hugh mckenzie 40088023 yves chuenmogne 40129773\n"); 
+            System.out.print("Population\n"); 
             int selectionArray[][] = {
-        		{1120,		1011},
         		
-        		{1110,		1010}
+
+                {2310 ,2016, 6521, 1120, 4420, 5306, 2635, 1514},
+                {1164 ,5024 ,1520, 1132, 2500, 1226, 1144, 3544},
+                {1012 ,2025 ,4501, 2553 ,6231, 2645, 1004, 4051},
+                {3622 ,4056, 6303, 3145, 5122, 4403, 4125, 6322},
+                {1152 ,2304 ,1256, 2034 ,1605, 3436, 1242, 4114},
+                {4614 ,2444, 6311 ,1120, 1022, 1026, 3503, 1345},
+                {2364 ,6451, 4236 ,2104, 4514, 3452, 2340, 4313},
+                {6111 ,6146, 1412 ,3002 ,2651, 4121, 4120 ,1456}
             };
             printBestSolution(selectionArray);
             
             //recheck the fitness again
-            int test = computeFitness(selectionArray, 2, 2);
-            log("Errors found: " + test + "\n");
+            
+            
+            int test = computeFitness(selectionArray, 8, 8);
+            log("Mismatches found: " + test + "\n");
+            
 
-            int testForBigArray = computeFitness(selectionArray, 2, 2);
-
-            log("Errors found: " + testForBigArray + "\n");
-
-            int x = 0;
-            int y = 0;
-        int z = 0;
-        int a = 0;
-
-            while (testForBigArray >= 4){
-                for (int i=0; i<8; i++) {
-                    x++;
-                }
-                for (int j=0; j<8; j++) {
-                    y++;
-                }
-                for (int i=0; i<8; i++) {
-                    z++;
-                }
-                for (int j=0; j<8; j++) {
-                    a++;
-                }
-                randomMutation(arrayRepresentation, x, y, z, a);
-            }
+          
     }
 
 }
