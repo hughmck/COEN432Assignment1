@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class EdgeSortingCode {
@@ -53,8 +54,16 @@ public class EdgeSortingCode {
                 randomMutation(a, i0, j0, i1, j1);  // switch pieces of puzzle
             }
         }
-     }   
+     }
 
+    public static void SwapMutation(int [][] array, int columnA, int columnB){
+        int temp =0;
+
+        for(int i =0; i < 7; i++){
+            temp = array[i][columnA];
+            array[i][columnA] = array[i][columnB];
+        }
+    }
 
      public static void printBestSolution(int[][] a) {
         int rows = a.length;
@@ -194,15 +203,26 @@ public class EdgeSortingCode {
                 {6111 ,6146, 1412 ,3002 ,2651, 4121, 4120 ,1456}
             };
             printBestSolution(selectionArray);
-            
-            //recheck the fitness again
-            
+
+
+            Random ran = new Random();
+            int x = ran.nextInt(1) + 7;
+
+            Random random = new Random();
+            int y = ran.nextInt(1) + 7;
             
             int test = computeFitness(selectionArray, 8, 8);
             log("Mismatches found: " + test + "\n");
-            
 
-          
+
+            while (test >= 50){
+
+                SwapMutation(selectionArray, x, y);
+            }
+
+            if (test >= 50){
+                printBestSolution(selectionArray);
+            }
     }
 
 }
