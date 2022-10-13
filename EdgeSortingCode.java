@@ -36,12 +36,21 @@ public class EdgeSortingCode {
             }}
         }
 
-    public static void randomMutation(int[][] a, int i0, int j0, int i1, int j1){
+    public static void RotationMutation(int[][] a, int i0, int j0, int i1, int j1){
 
-        int temp = a[i0][j0]; 
+        int temp = a[i0][j0];
         a[i0][j0] = a[i1][j1];
         a[i1][j1] = temp;
-    }    
+    }
+
+    public static void SwapMutation(int [][] array, int columnA, int columnB){
+    int temp =0;
+
+        for(int i =0; i < 7; i++){
+        temp = array[i][columnA];
+        array[i][columnA] = array[i][columnB];
+    }
+}
     public static void crossover(int[][] a, int i0, int j0, int i1, int j1){
         ArrayList<Integer> num1=numarray(a[i0][j0]);  // convert number to array
         ArrayList<Integer> num2=numarray(a[i1][j1]);
@@ -50,7 +59,7 @@ public class EdgeSortingCode {
  
         if(diff) {  // mismatching edges
             for(int i=j1;i<4;i++) {
-                randomMutation(a, i0, j0, i1, j1);  // switch pieces of puzzle
+                RotationMutation(a, i0, j0, i1, j1);  // switch pieces of puzzle
             }
         }
      }   
@@ -196,23 +205,15 @@ public class EdgeSortingCode {
 
             int x = 0;
             int y = 0;
-        int z = 0;
-        int a = 0;
 
             while (testForBigArray >= 4){
-                for (int i=0; i<8; i++) {
+                for (int i=0; i<7; i++) {
                     x++;
                 }
-                for (int j=0; j<8; j++) {
+                for (int j=0; j<7; j++) {
                     y++;
                 }
-                for (int i=0; i<8; i++) {
-                    z++;
-                }
-                for (int j=0; j<8; j++) {
-                    a++;
-                }
-                randomMutation(arrayRepresentation, x, y, z, a);
+                SwapMutation(arrayRepresentation, x, y); //trying to randomly select numbers to mutate from, then calculate fitness
             }
     }
 
