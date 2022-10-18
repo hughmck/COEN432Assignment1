@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class EdgeSortingCode {
 	
      
@@ -37,13 +38,13 @@ public class EdgeSortingCode {
             }}
         }
 
-    public static void randomMutation(int[][] a, int i0, int j0, int i1, int j1){
+    public static void randomElementCrossover(int[][] a, int i0, int j0, int i1, int j1){
 
         int temp = a[i0][j0]; 
         a[i0][j0] = a[i1][j1];
         a[i1][j1] = temp;
     }    
-    public static void crossover(int[][] a, int i0, int j0, int i1, int j1){
+    public static void swapElementCrossover(int[][] a, int i0, int j0, int i1, int j1){
         ArrayList<Integer> num1=numarray(a[i0][j0]);  // convert number to array
         ArrayList<Integer> num2=numarray(a[i1][j1]);
  
@@ -51,12 +52,12 @@ public class EdgeSortingCode {
  
         if(diff) {  // mismatching edges
             for(int i=j1;i<4;i++) {
-                randomMutation(a, i0, j0, i1, j1);  // switch pieces of puzzle
+                swapElementCrossover(a, i0, j0, i1, j1);  // switch pieces of puzzle
             }
         }
      }
 
-    public static void SwapMutation(int [][] array, int columnA, int columnB){
+    public static void SwapMutation(int [][] array, int columnA, int columnB){ //first attemt at trying to shift around columns
         int temp =0;
 
         for(int i =0; i < 7; i++){
@@ -105,7 +106,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("mismatch with top check on [" + r + "][" + c + "]");
+    					 // log("mismatch with top check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -123,7 +124,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("mismatch with bottom check on [" + r + "][" + c + "]");
+    					// log("mismatch with bottom check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -141,7 +142,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("mismatch with right check on [" + r + "][" + c + "]");
+    					// log("mismatch with right check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -160,7 +161,7 @@ public class EdgeSortingCode {
 
     				if(tmp1 != tmp2)
     				{
-    					log("mismatch with left check on [" + r + "][" + c + "]");
+                        //log("mismatch with left check on [" + r + "][" + c + "]");
     					mismatches++;
     				}
     			}
@@ -169,6 +170,17 @@ public class EdgeSortingCode {
     	
     	return mismatches;
     }
+
+    public static void swapRowCrossover(int[][] populationMatrix, int A, int B){
+
+        int[] temp = populationMatrix[A - 1];
+        populationMatrix[A - 1]= populationMatrix[B - 1];
+        populationMatrix[B - 1] = temp;
+
+    }
+
+
+
 
     public static void main(String args[]) throws Exception {
          //step 0 : initialization of the population 
@@ -202,25 +214,44 @@ public class EdgeSortingCode {
                 {2364 ,6451, 4236 ,2104, 4514, 3452, 2340, 4313},
                 {6111 ,6146, 1412 ,3002 ,2651, 4121, 4120 ,1456}
             };
-            printBestSolution(selectionArray);
+           // printBestSolution(selectionArray);
 
+            int upperbound = 8;
 
-            Random ran = new Random();
-            int x = ran.nextInt(1) + 7;
+            Random random1 = new Random();
+            int x = random1.nextInt(upperbound) - 1 ; //trying to find a number between 1 and 8 to swap
 
-            Random random = new Random();
-            int y = ran.nextInt(1) + 7;
-            
+            Random random2 = new Random();
+            int y = random2.nextInt(upperbound) - 1 ; //trying to find a number between 1 and 8 to find the column to swap
+
+            Random random3 = new Random();
+            int a = random3.nextInt(upperbound) - 1;
+
+            Random random4 = new Random();
+            int b = random4.nextInt(upperbound) - 1;
+
+            Random random5 = new Random();
+            int c = random5.nextInt(upperbound) - 1;
+
+            Random random6 = new Random();
+            int d = random6.nextInt(upperbound) - 1;
+
             int test = computeFitness(selectionArray, 8, 8);
-            log("Mismatches found: " + test + "\n");
+            // log("Mismatches found: " + test + "\n");
 
 
-            while (test >= 50){
+            int iterationCounter = 0;
 
-                SwapMutation(selectionArray, x, y);
+
+            while (test <= 50){
+
+                swapRowCrossover(selectionArray, x, y);
+                randomElementCrossover(selectionArray, a, b, c, d);
+                iterationCounter++;
+
             }
 
-            if (test >= 50){
+            if (test <= 50 || iterationCounter > 100000){
                 printBestSolution(selectionArray);
             }
     }
