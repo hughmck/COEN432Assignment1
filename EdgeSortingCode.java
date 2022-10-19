@@ -171,7 +171,7 @@ public class EdgeSortingCode {
     	return mismatches;
     }
 
-    public static void swapRowCrossover(int[][] populationMatrix, int A, int B){
+    public static void swapRowCrossover(int[][] populationMatrix, int A, int B){ //taking row A and row B in matrix, swapping them
 
         int[] temp = populationMatrix[A - 1];
         populationMatrix[A - 1]= populationMatrix[B - 1];
@@ -225,7 +225,7 @@ public class EdgeSortingCode {
             int y = random2.nextInt(upperbound) - 1 ; //trying to find a number between 1 and 8 to find the column to swap
 
             Random random3 = new Random();
-            int a = random3.nextInt(upperbound) - 1;
+            int a = random3.nextInt(upperbound) - 1; //next 4 integers are random numbers between 0 and 8 for the index number of two numbers in the array to perform a swap on
 
             Random random4 = new Random();
             int b = random4.nextInt(upperbound) - 1;
@@ -236,7 +236,7 @@ public class EdgeSortingCode {
             Random random6 = new Random();
             int d = random6.nextInt(upperbound) - 1;
 
-            int test = computeFitness(selectionArray, 8, 8);
+            int test = computeFitness(selectionArray, 8, 8); //computes the number of mismatched edges in the entire array
             // log("Mismatches found: " + test + "\n");
 
 
@@ -245,8 +245,8 @@ public class EdgeSortingCode {
 
             while (test <= 50){
 
-                swapRowCrossover(selectionArray, x, y);
-                randomElementCrossover(selectionArray, a, b, c, d);
+                swapRowCrossover(selectionArray, x, y); //swaps rows at random
+                randomElementCrossover(selectionArray, a, b, c, d); //swaps two random numbers in the array
                 iterationCounter++;
 
             }
