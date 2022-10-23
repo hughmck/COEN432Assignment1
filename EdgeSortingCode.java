@@ -39,11 +39,11 @@ public class EdgeSortingCode {
         }
 
     public static void randomElementCrossover(int[][] a, int i0, int j0, int i1, int j1){
-
         int temp = a[i0][j0]; 
         a[i0][j0] = a[i1][j1];
         a[i1][j1] = temp;
-    }    
+    }
+
     public static void swapElementCrossover(int[][] a, int i0, int j0, int i1, int j1){
         ArrayList<Integer> num1=numarray(a[i0][j0]);  // convert number to array
         ArrayList<Integer> num2=numarray(a[i1][j1]);
@@ -203,8 +203,6 @@ public class EdgeSortingCode {
     }
 
 
-
-
     public static void main(String args[]) throws Exception {
          //step 0 : initialization of the population 
             Scanner sc = new Scanner(new BufferedReader(new FileReader(  "Ass1Input.txt")));
@@ -240,37 +238,37 @@ public class EdgeSortingCode {
             int upperbound = 7;
 
             Random random1 = new Random();
-            int x = random1.nextInt(upperbound); //trying to find a number between 1 and 8 to swap
+            int rowNumber = random1.nextInt(upperbound); //trying to find a number between 1 and 8 to swap
 
-        System.out.println(x);
+        System.out.println(rowNumber);
 
             Random random2 = new Random();
-            int y = random2.nextInt(upperbound); //trying to find a number between 1 and 8 to find the column to swap
+            int rowNumber2 = random2.nextInt(upperbound); //trying to find a number between 1 and 8 to find the column to swap
 
-        System.out.println(y);
+        System.out.println(rowNumber2);
 
 
         Random random3 = new Random();
-            int a = random3.nextInt(upperbound); //next 4 integers are random numbers between 0 and 8 for the index number of two numbers in the array to perform a swap on
+            int rowIndexInteger1 = random3.nextInt(upperbound); //next 4 integers are random numbers between 0 and 8 for the index number of two numbers in the array to perform a swap on
 
-        System.out.println(a);
+        System.out.println(rowIndexInteger1);
 
         Random random4 = new Random();
-            int b = random4.nextInt(upperbound);
+            int columnIndexInteger1 = random4.nextInt(upperbound);
 
-        System.out.println(b);
+        System.out.println(columnIndexInteger1);
 
 
         Random random5 = new Random();
-            int c = random5.nextInt(upperbound);
+            int rowIndexInteger2 = random5.nextInt(upperbound);
 
-        System.out.println(c);
+        System.out.println(rowIndexInteger2);
 
 
         Random random6 = new Random();
-            int d = random6.nextInt(upperbound);
+            int columnIndexInteger2 = random6.nextInt(upperbound);
 
-        System.out.println(d);
+        System.out.println(columnIndexInteger2);
 
         System.out.println();
 
@@ -278,17 +276,46 @@ public class EdgeSortingCode {
             // log("Mismatches found: " + test + "\n");
 
 
-            int iterationCounter = 0;
+        int iterationCounter = 0;
+
+        int[][] bestArray = new int[8][];
+        int[][] rowswap = new int[8][8];
+        int[][] crossover = new int[8][8];
+        int[][] mutate = new int[8][8];
+
+        int[][] tester = new int[8][];
 
 
-            while (test >= 50 && iterationCounter < 100000){
 
-                swapRowCrossover(selectionArray, x, y); //swaps rows at random
-                randomElementCrossover(selectionArray, a, b, c, d); //swaps two random numbers in the array
-                test = computeFitness(selectionArray,8,8);
-                rotateMutation(selectionArray, x, y);
-                iterationCounter++;
+//        while (test >= 50 && iterationCounter < 3){
+//
+//            swapRowCrossover(selectionArray, x, y); //swaps rows at random
+//            rowswap = selectionArray;
+//            randomElementCrossover(rowswap, a, b, c, d); //swaps two random numbers in the array
+//            crossover = rowswap;
+//            rotateMutation(rowswap, x, y);
+//            mutate = crossover;
+//            test = computeFitness(mutate,8,8);
+//            bestArray = mutate;
+//            printBestSolution(bestArray);
+//            iterationCounter++;
+//        }
+
+            for (int i = 0; i < 5; i++) {
+                if (test >= 50) {
+                    swapRowCrossover(selectionArray, rowNumber, rowNumber2); //swaps rows at random
+                    rowswap = selectionArray;
+                    randomElementCrossover(rowswap, rowIndexInteger1, columnIndexInteger1, rowIndexInteger2, columnIndexInteger2); //swaps two random numbers in the array
+                    crossover = rowswap;
+                    rotateMutation(rowswap, rowNumber, rowNumber2);
+                    mutate = crossover;
+                    test = computeFitness(mutate, 8, 8);
+                    bestArray = mutate;
+                    selectionArray = bestArray;
+                }
+                tester = bestArray;
+                //            printBestSolution(bestArray);
             }
-        printBestSolution(selectionArray);
+            printBestSolution(tester);
+        }
     }
-}
