@@ -242,42 +242,43 @@ public class EdgeSortingCode {
             //7222 7257 2523 4113 3762 5232 5231 2567
 //            };
 
-            int upperbound = 7;
-
-            Random random1 = new Random();
-            int rowNumber = random1.nextInt(upperbound); //trying to find a number between 1 and 8 to swap
-
-        System.out.println(rowNumber);
-
-            Random random2 = new Random();
-            int rowNumber2 = random2.nextInt(upperbound); //trying to find a number between 1 and 8 to find the column to swap
-
-        System.out.println(rowNumber2);
-
-
-        Random random3 = new Random();
-            int rowIndexInteger1 = random3.nextInt(upperbound); //next 4 integers are random numbers between 0 and 8 for the index number of two numbers in the array to perform a swap on
-
-        System.out.println(rowIndexInteger1);
-
-        Random random4 = new Random();
-            int columnIndexInteger1 = random4.nextInt(upperbound);
-
-        System.out.println(columnIndexInteger1);
-
-
-        Random random5 = new Random();
-            int rowIndexInteger2 = random5.nextInt(upperbound);
-
-        System.out.println(rowIndexInteger2);
-
-
-        Random random6 = new Random();
-            int columnIndexInteger2 = random6.nextInt(upperbound);
-
-        System.out.println(columnIndexInteger2);
-
-        System.out.println();
+//            int upperbound = 7;
+//
+//            Random random1 = new Random();
+//            int rowNumber = random1.nextInt(upperbound); //trying to find a number between 1 and 8 to swap
+//
+//            System.out.println(rowNumber);
+//
+//            Random random2 = new Random();
+//            int rowNumber2 = random2.nextInt(upperbound); //trying to find a number between 1 and 8 to find the column to swap
+//
+//            System.out.println(rowNumber2);
+//
+//
+//            Random random3 = new Random();
+//            int rowIndexInteger1 = random3.nextInt(upperbound); //next 4 integers are random numbers between 0 and 8 for the index number of two numbers in the array to perform a swap on
+//
+//            System.out.println(rowIndexInteger1);
+//
+//            Random random4 = new Random();
+//            int columnIndexInteger1 = random4.nextInt(upperbound);
+//
+//            System.out.println(columnIndexInteger1);
+//
+//
+//            Random random5 = new Random();
+//            int rowIndexInteger2 = random5.nextInt(upperbound);
+//
+//            System.out.println(rowIndexInteger2);
+//
+//
+//            Random random6 = new Random();
+//            int columnIndexInteger2 = random6.nextInt(upperbound);
+//
+//            System.out.println(columnIndexInteger2);
+//
+//
+//        System.out.println();
 
         int test = computeFitness(selectionArray, 8, 8); //computes the number of mismatched edges in the entire array
             // log("Mismatches found: " + test + "\n");
@@ -308,8 +309,28 @@ public class EdgeSortingCode {
 //            iterationCounter++;
 //        }
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10000000; i++) {
             if (test >= 50) {
+                int upperbound = 7;
+
+                Random random1 = new Random();
+                int rowNumber = random1.nextInt(upperbound); //trying to find a number between 1 and 8 to swap
+
+                Random random2 = new Random();
+                int rowNumber2 = random2.nextInt(upperbound); //trying to find a number between 1 and 8 to find the column to swap
+
+                Random random3 = new Random();
+                int rowIndexInteger1 = random3.nextInt(upperbound); //next 4 integers are random numbers between 0 and 8 for the index number of two numbers in the array to perform a swap on
+
+                Random random4 = new Random();
+                int columnIndexInteger1 = random4.nextInt(upperbound);
+
+                Random random5 = new Random();
+                int rowIndexInteger2 = random5.nextInt(upperbound);
+
+                Random random6 = new Random();
+                int columnIndexInteger2 = random6.nextInt(upperbound);
+
                 swapRowCrossover(selectionArray, rowNumber, rowNumber2); //swaps rows at random
                 rowswap = selectionArray;
                 randomElementCrossover(rowswap, rowIndexInteger1, columnIndexInteger1, rowIndexInteger2, columnIndexInteger2); //swaps two random numbers in the array
@@ -319,8 +340,10 @@ public class EdgeSortingCode {
                 test = computeFitness(mutate, 8, 8);
                 selectionArray = mutate;
             }
-            printBestSolution(selectionArray);
+            // printBestSolution(selectionArray);
         }
         printBestSolution(selectionArray);
+        System.out.println(test);
         }
-    }
+
+}
