@@ -344,7 +344,7 @@ public class EdgeSortingCode {
             }
             // printBestSolution(selectionArray);
         }
-        FileWriter fw = new FileWriter("COEN432output.txt",true);
+        FileWriter fw = new FileWriter("output.txt",true);
         PrintWriter out = new PrintWriter(fw);
         printBestSolution(selectionArray);
         System.out.println(test);
