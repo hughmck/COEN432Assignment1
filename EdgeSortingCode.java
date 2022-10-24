@@ -202,6 +202,13 @@ public class EdgeSortingCode {
         return result + place * arrayValue;
     }
 
+    static int[][] updateArray(int[][] oldArray, int[][] newArray){
+
+        newArray = oldArray;
+        return newArray;
+    }
+
+
 
     public static void main(String args[]) throws Exception {
          //step 0 : initialization of the population 
@@ -301,21 +308,19 @@ public class EdgeSortingCode {
 //            iterationCounter++;
 //        }
 
-            for (int i = 0; i < 5; i++) {
-                if (test >= 50) {
-                    swapRowCrossover(selectionArray, rowNumber, rowNumber2); //swaps rows at random
-                    rowswap = selectionArray;
-                    randomElementCrossover(rowswap, rowIndexInteger1, columnIndexInteger1, rowIndexInteger2, columnIndexInteger2); //swaps two random numbers in the array
-                    crossover = rowswap;
-                    rotateMutation(rowswap, rowNumber, rowNumber2);
-                    mutate = crossover;
-                    test = computeFitness(mutate, 8, 8);
-                    bestArray = mutate;
-                    selectionArray = bestArray;
-                }
-                tester = bestArray;
-                //            printBestSolution(bestArray);
+        for (int i = 0; i < 10; i++) {
+            if (test >= 50) {
+                swapRowCrossover(selectionArray, rowNumber, rowNumber2); //swaps rows at random
+                rowswap = selectionArray;
+                randomElementCrossover(rowswap, rowIndexInteger1, columnIndexInteger1, rowIndexInteger2, columnIndexInteger2); //swaps two random numbers in the array
+                crossover = rowswap;
+                rotateMutation(rowswap, rowNumber, rowNumber2);
+                mutate = crossover;
+                test = computeFitness(mutate, 8, 8);
+                selectionArray = mutate;
             }
-            printBestSolution(tester);
+            printBestSolution(selectionArray);
+        }
+        printBestSolution(selectionArray);
         }
     }
