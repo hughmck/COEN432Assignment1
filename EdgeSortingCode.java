@@ -2,6 +2,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 
 public class EdgeSortingCode {
@@ -37,7 +40,6 @@ public class EdgeSortingCode {
                 }
             }}
         }
-
     public static void randomElementCrossover(int[][] a, int i0, int j0, int i1, int j1){
         int temp = a[i0][j0]; 
         a[i0][j0] = a[i1][j1];
@@ -342,8 +344,10 @@ public class EdgeSortingCode {
             }
             // printBestSolution(selectionArray);
         }
+        FileWriter fw = new FileWriter("COEN432output.txt",true);
+        PrintWriter out = new PrintWriter(fw);
         printBestSolution(selectionArray);
         System.out.println(test);
-        }
-
+        out.close();
+    }
 }
