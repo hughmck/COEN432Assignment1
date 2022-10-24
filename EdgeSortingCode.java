@@ -311,8 +311,8 @@ public class EdgeSortingCode {
 //            iterationCounter++;
 //        }
 
-        for (int i = 0; i < 10000000; i++) {
-            if (test >= 50) {
+        for (int i = 0; i < 1000000000; i++) {
+            if (test >= 150) {
                 int upperbound = 7;
 
                 Random random1 = new Random();
